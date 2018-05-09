@@ -6,8 +6,26 @@ import pandas as pd
 import numpy as np
 import string
 from nltk.corpus import stopwords
+from flask_cors import CORS,cross_origin
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+@app.route("/",methods=['POST'])
+def predict():
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            print(data)
+            lyric = [data['Lyrics']]
+
+            svm = joblib.load("./svc.pkl")
+        except ValueError:
+            return jsonify("Please enter a Text.")
+
+        resp = svm.predict(lyric).tolist()
+        print(resp)
+        return jsonify(resp)
 
 def processamento_texto(txt):
     # remover quebras de linha
@@ -20,27 +38,6 @@ def processamento_texto(txt):
     txt = [word for word in txt if word.lower() not in stopwords.words('portuguese')]
 
     return txt
-
-
-@app.route("/")
-def hello():
-    return "Hello World!"
-
-@app.route("/predict", methods=['POST'])
-def predict():
-    if request.method == 'POST':
-        try:
-            data = request.get_json()
-            lyric = [data['Lyrics']]
-
-            svm = joblib.load("./svc.pkl")
-        except ValueError:
-            return jsonify("Please enter a Text.")
-
-        resp = svm.predict(lyric).tolist()
-        print(resp)
-        return jsonify(resp)
-
 
 if __name__ == '__main__':
     app.run(debug=True)

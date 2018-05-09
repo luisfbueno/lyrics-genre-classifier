@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
+
+    <meta charset="utf-8">
+    <title>Qual é o gênero?</title>
+  </head>
+
+  <body>
+
+    <div id="app">
+        Letra da musica:<br>
+        <textarea v-model="lyrics"></textarea>
+        <br>
+        <button v-on:click="request">Enviar</button>
+        {{lyrics}}
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+
+</html>
