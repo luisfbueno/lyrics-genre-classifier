@@ -2,7 +2,8 @@ var app = new Vue({
   el: '#app',
   data: {
     lyrics: 'Vai tua vida\nTeu caminho é de paz e amor\nA tua vida\nÉ uma linda canção de amor\nAbre os teus braços e canta\nA última esperança\nA esperança divina\nDe amar em paz',
-    genero: ''
+    genero: '',
+    url_destino: 'http://127.0.0.1:5000/'
   },
   methods: {
     request: function() {
@@ -12,7 +13,7 @@ var app = new Vue({
       json = JSON.stringify(json)
       console.log(json)
 
-      this.$http.post('http://127.0.0.1:5000/',json).then(function(response){
+      this.$http.post(url_destino,json).then(function(response){
         if(response.status == "200"){
             console.log(response.data[0]);
           resp = response.data[0]
