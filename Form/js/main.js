@@ -7,15 +7,16 @@ var app = new Vue({
   },
   methods: {
     request: function() {
-      var self=this;
-      var str = this.lyrics;
+      this.genero = ''
+      var self=this
+      var str = this.lyrics
       var json = {"Lyrics": str}
       json = JSON.stringify(json)
       console.log(json)
 
-      this.$http.post(url_destino,json).then(function(response){
+      this.$http.post(self.url_destino,json).then(function(response){
         if(response.status == "200"){
-            console.log(response.data[0]);
+            console.log('Resposta Recebida!  ' + response.data[0]);
           resp = response.data[0]
           if(resp == 0){
             self.genero = 'Bossa Nova'
