@@ -26,6 +26,12 @@
           <h1>Qual é o Gênero?</h1>
         </div>
 
+        <!-- Alerta de erro para input vazio -->
+        <div v-if="show_alert" class="alert alert-danger">
+          <a v-on:click="hide_alert" href="#" class="close">&times;</a>
+          <strong>Erro!</strong> Insira o texto antes de enviar!
+        </div>
+
         <div class="form-group">
           <label for="comment">Letra da música:</label>
           <textarea v-model="lyrics" class="form-control" rows="5"></textarea>

@@ -1,14 +1,27 @@
 var app = new Vue({
   el: '#app',
   data: {
-    lyrics: 'Vai tua vida\nTeu caminho é de paz e amor\nA tua vida\nÉ uma linda canção de amor\nAbre os teus braços e canta\nA última esperança\nA esperança divina\nDe amar em paz',
+    lyrics: '',
     genero: '',
-    url_destino: 'http://127.0.0.1:5000/'
+    url_destino: 'http://127.0.0.1:5000/', // Variável que indica o endereço do servidor
+    show_alert: false
   },
   methods: {
     request: function() {
+
+      // Se não tiver nada na text area, mostra alerta e retorna
+      if(this.lyrics == ''){
+        this.show_alert = true
+        return
+      }
+      else{
+        this.show_alert = false
+      }
+
+
       this.genero = ''
       var self=this
+      // Criando JSON para envio
       var str = this.lyrics
       var json = {"Lyrics": str}
       json = JSON.stringify(json)
@@ -36,6 +49,10 @@ var app = new Vue({
 
         }
       })
+    },
+
+    hide_alert: function(){
+      this.show_alert = false
     }
   }
 })
