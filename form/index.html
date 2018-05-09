@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+    <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
 
-    <meta charset="utf-8">
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <title>Qual é o gênero?</title>
   </head>
 
   <body>
+    <div class="container" id="app">
+        <div class="page-header">
+          <h1>Qual é o Gênero?</h1>
+        </div>
 
-    <div id="app">
-        Letra da musica:<br>
-        <textarea v-model="lyrics"></textarea>
+        <div class="form-group">
+          <label for="comment">Letra da música:</label>
+          <textarea v-model="lyrics" class="form-control" rows="5"></textarea>
+        </div>
+        <button v-on:click="request" type="button" class="btn btn-primary btn-block">Enviar</button>
+
         <br>
-        <button v-on:click="request">Enviar</button>
-        {{lyrics}}
+        <div v-if="genero != ''" class="jumbotron">
+          <h2>Gênero da música: {{genero}}</h2>
+        </div>
+
     </div>
 
     <script src="js/main.js"></script>

@@ -15,7 +15,23 @@ var app = new Vue({
       this.$http.post('http://127.0.0.1:5000/',json).then(function(response){
         if(response.status == "200"){
             console.log(response.data[0]);
-        self.genero = response.data // use self instead of this
+          resp = response.data[0]
+          if(resp == 0){
+            self.genero = 'Bossa Nova'
+          }
+          else if(resp == 1){
+            self.genero = 'Funk'
+          }
+          else if(resp == 2){
+            self.genero = 'Gospel'
+          }
+          else if(resp == 3){
+            self.genero = 'Sertanejo'
+          }
+          else{
+            self.genero = ''
+          }
+
         }
       })
     }
